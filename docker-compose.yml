@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  jenkins:
+    image: "library/jenkins:2.46.3"
+    ports:
+      - "8080:8080"
+    networks: 
+      - default
+    volumes:
+      - ./jenkins_home:/var/jenkins_home 
+
+
+  nexus:
+    image: "sonatype/nexus:oss"
+    expose:
+      - "8081"
+    ports:
+      - "8081:8081"
+    networks: 
+      - default
+    volumes:
+      - nexus_work:/sonatype-work
+
+networks:
+  default:
+
+volumes:
+  nexus_work:
+  jenkins_home:
